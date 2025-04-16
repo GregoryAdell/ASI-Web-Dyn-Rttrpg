@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sp.model.Affinity;
 import com.sp.model.Card;
 import com.sp.model.CardFormDTO;
+import com.sp.model.Family;
 
 @Controller // AND NOT @RestController
 public class RequestCrt {
@@ -40,13 +42,16 @@ public class RequestCrt {
     public String addcard(Model model) {
         CardFormDTO cardForm = new CardFormDTO();
         model.addAttribute("cardForm", cardForm);
+        model.addAttribute("family", Family.values());
+        model.addAttribute("affinity", Affinity.values());
         return "cardForm";
     }
 
     @RequestMapping(value = { "/addCard"}, method = RequestMethod.POST)
     public String addcard(Model model, @ModelAttribute("cardForm") CardFormDTO cardForm) {
-        Card p=cardDao.addCard(cardForm.getName(),cardForm.getColor(),cardForm.getSuperPower(),cardForm.getImgUrl());
+        Card p=cardDao.addCard(cardForm.getName(),cardForm.getDescription(),cardForm.getImgUrl(),cardForm.getFamily(), cardForm.getAffinity(), cardForm.getHp(), cardForm.getAttack(), cardForm.getDefense(), cardForm.getEnergy());
         model.addAttribute("myCard",p );
+    
         return "cardView";
     }
 
