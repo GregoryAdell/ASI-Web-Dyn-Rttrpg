@@ -10,7 +10,7 @@
 		<div th:replace="~{fragments/header :: header}">
 		<h1> THIS IS A DEFAULT HEADER</h1>
 	</div>
-	<form th:action="@{/addcard}"
+	<form th:action="@{/addCard}"
          th:object="${cardForm}" method="POST">
 		<fieldset >
 			<legend >Add your card ! </legend>
