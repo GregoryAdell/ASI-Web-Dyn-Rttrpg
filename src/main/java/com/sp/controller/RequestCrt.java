@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sp.model.Poney;
-import com.sp.model.PoneyFormDTO;
+import com.sp.model.Card;
+import com.sp.model.CardFormDTO;
 
 @Controller // AND NOT @RestController
 public class RequestCrt {
@@ -17,7 +17,7 @@ public class RequestCrt {
     @Value("${welcome.message}")
     private String message;
     @Autowired
-    private PoneyDao poneyDao;
+    private CardDao cardDao;
 
     private static String messageLocal="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
@@ -32,28 +32,29 @@ public class RequestCrt {
     
     @RequestMapping(value = { "/view"}, method = RequestMethod.GET)
     public String view(Model model) {
-        model.addAttribute("myPoney",poneyDao.getRandomPoney() );
-        return "poneyView";
+        model.addAttribute("myCard",cardDao.getRandomCard() );
+        return "cardView";
     }
 
-    @RequestMapping(value = { "/addPoney"}, method = RequestMethod.GET)
-    public String addponey(Model model) {
-        PoneyFormDTO poneyForm = new PoneyFormDTO();
-        model.addAttribute("poneyForm", poneyForm);
-        return "poneyForm";
+    @RequestMapping(value = { "/addCard"}, method = RequestMethod.GET)
+    public String addcard(Model model) {
+        CardFormDTO cardForm = new CardFormDTO();
+        model.addAttribute("cardForm", cardForm);
+        return "cardForm";
     }
 
-    @RequestMapping(value = { "/addPoney"}, method = RequestMethod.POST)
-    public String addponey(Model model, @ModelAttribute("poneyForm") PoneyFormDTO poneyForm) {
-        Poney p=poneyDao.addPoney(poneyForm.getName(),poneyForm.getColor(),poneyForm.getSuperPower(),poneyForm.getImgUrl());
-        model.addAttribute("myPoney",p );
-        return "poneyView";
+    @RequestMapping(value = { "/addCard"}, method = RequestMethod.POST)
+    public String addcard(Model model, @ModelAttribute("cardForm") CardFormDTO cardForm) {
+        Card p=cardDao.addCard(cardForm.getName(),cardForm.getDescription(),cardForm.getImgUrl(),cardForm.getFamily(), cardForm.getAffinity(), cardForm.getHp(), cardForm.getAttack(), cardForm.getDefense(), cardForm.getEnergy());
+        model.addAttribute("myCard",p );
+    
+        return "cardView";
     }
 
     @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public String viewList(Model model) {
-        model.addAttribute("poneyList",poneyDao.getPoneyList() );
-        return "poneyViewList";
+        model.addAttribute("cardList",cardDao.getCardList() );
+        return "cardViewList";
     }
 
 }
