@@ -42,8 +42,8 @@ public class RequestCrt {
     public String addcard(Model model) {
         CardFormDTO cardForm = new CardFormDTO();
         model.addAttribute("cardForm", cardForm);
-        model.addAttribute("family", Family.values());
-        model.addAttribute("affinity", Affinity.values());
+        model.addAttribute("families", Family.values());
+        model.addAttribute("affinities", Affinity.values());
         return "cardForm";
     }
 

@@ -36,14 +36,14 @@
 				<div>
 					<input id="from-family" type="text" list="family-list">
 					<datalist id="family-list">
-						<option th:each="b : ${family}" th:value="${b}"></option>
+						<option th:each="b : ${families}" th:value="${b}"></option>
 					</datalist>
 				</div>
 				<label for="from-affinity">Affinity</label>
 				<div>
 					<input id="from-affinity" type="text" list="affinity-list">
 					<datalist id="affinity-list">
-						<option th:each="c : ${affinity}" th:value="${c}"></option>
+						<option th:each="c : ${affinities}" th:value="${c}"></option>
 					</datalist>
 				</div>
 				<label  for="form-hp">HP</label>

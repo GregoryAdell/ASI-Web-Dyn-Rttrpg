@@ -53,9 +53,9 @@ public class CardDao {
 		return this.myCardList.get(index);
 	}
 
-	public Card addCard(String name, String description, String imgUrl, Family family, Affinity affinity, int hp, int attack,
+	public Card addCard(String name, String description, String imgUrl, String family, String affinity, int hp, int attack,
     int defense, int energy) {
-		Card p=new Card(name, description, imgUrl, family, affinity, hp, attack, defense, energy);
+		Card p=new Card(name, description, imgUrl,Family.valueOf(family), Affinity.valueOf(affinity), hp, attack, defense, energy);
 		this.myCardList.add(p);
 		return p;
 	}

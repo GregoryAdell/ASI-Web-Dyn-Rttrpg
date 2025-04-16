@@ -23,13 +23,13 @@ public class CardFormDTO {
 		this.energy = 0;
 	}
 
-    public CardFormDTO(String name, String description, String imgUrl, Family family, Affinity affinity, int hp,
+    public CardFormDTO(String name, String description, String imgUrl, String family, String affinity, int hp,
 			int attack, int defense, int energy) {
 		this.name = name;
 		this.description = description;
 		this.imgUrl = imgUrl;
-		this.family = family;
-		this.affinity = affinity;
+		this.family = Family.valueOf(family);
+		this.affinity = Affinity.valueOf(affinity);
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
@@ -60,20 +60,20 @@ public class CardFormDTO {
 		this.imgUrl = imgUrl;
 	}
 
-	public Family getFamily() {
-		return family;
+	public String getFamily() {
+		return family.toString();
 	}
 
-	public void setFamily(Family family) {
-		this.family = family;
+	public void setFamily(String family) {
+		this.family = Family.valueOf(family);
 	}
 
-	public Affinity getAffinity() {
-		return affinity;
+	public String getAffinity() {
+		return affinity.toString();
 	}
 
-	public void setAffinity(Affinity affinity) {
-		this.affinity = affinity;
+	public void setAffinity(String affinity) {
+		this.affinity = Affinity.valueOf(affinity);
 	}
 
 	public int getHp() {
