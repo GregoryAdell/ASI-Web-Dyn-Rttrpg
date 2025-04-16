@@ -34,17 +34,32 @@
 				</div>
 				<label for="from-family">Family</label>
 				<div>
-					<input id="from-family" type="text" list="family-list">
-					<datalist id="family-list">
-						<option th:each="b : ${families}" th:value="${b}"></option>
-					</datalist>
+					<select name="family" id="from-family" th:field="*{family}">
+						<option value="">-- Sélectionnez une famille --</option>
+						<option value="ECUREUIL">Écureuil</option>
+						<option value="CHAT">Chat</option>
+						<option value="RENARD">Renard</option>
+						<option value="OURS">Ours</option>
+						<option value="LICORNE">Licorne</option>
+						<option value="LAPIN">Lapin</option>
+						<option value="MOINEAU">Moineau</option>
+					</select>
 				</div>
 				<label for="from-affinity">Affinity</label>
 				<div>
-					<input id="from-affinity" type="text" list="affinity-list">
-					<datalist id="affinity-list">
-						<option th:each="c : ${affinities}" th:value="${c}"></option>
-					</datalist>
+					<select name="affinity" id="from-affinity" th:field="*{affinity}">
+						<option value="">-- Sélectionnez une affinité de type --</option>
+						<option value="GLACE">Glace</option>
+						<option value="FEU">Feu</option>
+						<option value="EAU">Eau</option>
+						<option value="ROCHE">Roche</option>
+						<option value="AIR">Air</option>
+						<option value="ELECTRICITE">Électricité</option>
+						<option value="POISON">Poison</option>
+						<option value="PLANTE">Plante</option>
+						<option value="LUMIERE">Lumière</option>
+						<option value="OMBRE">Ombre</option>
+					</select>
 				</div>
 				<label  for="form-hp">HP</label>
 				<div >

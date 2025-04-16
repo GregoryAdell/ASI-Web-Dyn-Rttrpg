@@ -9,8 +9,8 @@
     <div th:replace="~{fragments/header :: header}">
         <h1> THIS IS A DEFAULT HEADER</h1>
     </div>
-    <div>
-        <img th:src="${myCard.imgUrl}" alt="">
+    <div class="card-container-solo">
+        <img class="card-image-solo" th:src="${myCard.imgUrl}" alt="">
 
         <h3 th:utext="${myCard.name}">...</h3>
 

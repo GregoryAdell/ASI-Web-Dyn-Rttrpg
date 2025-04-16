@@ -4,8 +4,8 @@ public class CardFormDTO {
 	private String name;
 	private String description;
 	private String imgUrl;
-	private Family family;
-    private Affinity affinity;
+	private String family;
+    private String affinity;
     private int hp;
     private int attack;
     private int defense;
@@ -15,8 +15,8 @@ public class CardFormDTO {
 		this.name = "";
 		this.description = "";
 		this.imgUrl = "";
-		this.family = Family.MOINEAU;
-		this.affinity = Affinity.AIR;
+		this.family = "";
+		this.affinity = "";
 		this.hp = 0;
 		this.attack = 0;
 		this.defense = 0;
@@ -28,8 +28,8 @@ public class CardFormDTO {
 		this.name = name;
 		this.description = description;
 		this.imgUrl = imgUrl;
-		this.family = Family.valueOf(family);
-		this.affinity = Affinity.valueOf(affinity);
+		this.family = family;
+		this.affinity = affinity;
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
@@ -65,7 +65,7 @@ public class CardFormDTO {
 	}
 
 	public void setFamily(String family) {
-		this.family = Family.valueOf(family);
+		this.family = family;
 	}
 
 	public String getAffinity() {
@@ -73,7 +73,7 @@ public class CardFormDTO {
 	}
 
 	public void setAffinity(String affinity) {
-		this.affinity = Affinity.valueOf(affinity);
+		this.affinity = affinity;
 	}
 
 	public int getHp() {

@@ -6,8 +6,8 @@ public class Card  {
 	private String name;
 	private String description;
 	private String imgUrl;
-	private Family family;
-    private Affinity affinity;
+	private String family;
+    private String affinity;
     private int hp;
     private int attack;
     private int defense;
@@ -18,15 +18,15 @@ public class Card  {
         this.name = "";
         this.description = "";
         this.imgUrl = "";
-        this.family = Family.MOINEAU;
-        this.affinity = Affinity.AIR;
+        this.family = "";
+        this.affinity = "";
         this.hp = 0;
         this.attack = 0;
         this.defense = 0;
         this.energy = 0;
     }
     
-    public Card(String name, String description, String imgUrl, Family family, Affinity affinity, int hp, int attack,
+    public Card(String name, String description, String imgUrl, String family, String affinity, int hp, int attack,
             int defense, int energy) {
         this.name = name;
         this.description = description;
@@ -63,19 +63,19 @@ public class Card  {
         this.imgUrl = imgUrl;
     }
 
-    public Family getFamily() {
+    public String getFamily() {
         return family;
     }
 
-    public void setFamily(Family family) {
+    public void setFamily(String family) {
         this.family = family;
     }
 
-    public Affinity getAffinity() {
+    public String getAffinity() {
         return affinity;
     }
 
-    public void setAffinity(Affinity affinity) {
+    public void setAffinity(String affinity) {
         this.affinity = affinity;
     }
 

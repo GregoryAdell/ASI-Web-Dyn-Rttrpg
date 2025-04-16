@@ -1,23 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Welcome</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
     <div th:replace="~{fragments/header :: header}">
         <h1> THIS IS A DEFAULT HEADER</h1>
     </div>
+
     <ul>
-        <li th:each="card : ${cardList}">
-            <div>
-                <img th:src="${myCard.imgUrl}" alt="">
-                <h3 th:utext="${myCard.name}">...</h3>
-                <h5 th:text="'Family:  '+${myCard.family}">...</h5>
-                <h5 th:text="'Affinity:  '+${myCard.affinity}">...</h5>
-            </div>
-        <li>
+        <li th:each="myCard : ${cardList}">
+            <form th:action="@{/addCard}" method="post">
+                <input type="hidden" name="name" th:value="${myCard.name}" />
+                <input type="hidden" name="imgUrl" th:value="${myCard.imgUrl}" />
+                <input type="hidden" name="family" th:value="${myCard.family}" />
+                <input type="hidden" name="affinity" th:value="${myCard.affinity}" />
+                <input type="hidden" name="description" th:value="${myCard.description}" />
+                <input type="hidden" name="hp" th:value="${myCard.hp}" />
+                <input type="hidden" name="attack" th:value="${myCard.attack}" />
+                <input type="hidden" name="defense" th:value="${myCard.defense}" />
+                <input type="hidden" name="energy" th:value="${myCard.energy}" />
+
+                <button type="submit" class="card-container" style="border:none; background:none; padding:0; cursor:pointer;">
+                    <img class="card-image" th:src="${myCard.imgUrl}" alt="card image" />
+                    <h3 th:text="${myCard.name}">...</h3>
+                    <h5 th:text="'Family: ' + ${myCard.family}">Family</h5>
+                    <h5 th:text="'Affinity: ' + ${myCard.affinity}">Affinity</h5>
+                </button>
+            </form>
+        </li>
     </ul>
 </body>
 </html>
