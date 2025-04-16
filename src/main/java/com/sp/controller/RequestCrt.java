@@ -13,6 +13,8 @@ public class RequestCrt {
 
     @Value("${welcome.message}")
     private String message;
+    @Autowired
+    private PoneyDao poneyDao;
 
     private static String messageLocal="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
@@ -24,5 +26,12 @@ public class RequestCrt {
 
         return "index";
     }
+    
+    @RequestMapping(value = { "/view"}, method = RequestMethod.GET)
+        public String view(Model model) {
+        model.addAttribute("myPoney",poneyDao.getRandomPoney() );
+        return "poneyView";
+    }
+
 }
 
