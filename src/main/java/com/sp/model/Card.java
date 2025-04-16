@@ -1,26 +1,7 @@
 package com.sp.model;
 
 public class Card  {
-    private enum Family {
-        ECUREUIL,
-        CHAT,
-        RENARD,
-        OURS,
-        LICORNE,
-        LAPIN,
-        MOINEAU
-    };
-
-    private enum Affinity {
-        GLACE,
-        FEU,
-        EAU,
-        ROCHE,
-        AIR,
-        ELECTRICITE,
-        POISON,
-        PLANTE
-    }
+    
 
 	private String name;
 	private String description;
@@ -37,8 +18,8 @@ public class Card  {
         this.name = "";
         this.description = "";
         this.imgUrl = "";
-        this.family = "";
-        this.affinity = "";
+        this.family = Family.MOINEAU;
+        this.affinity = Affinity.AIR;
         this.hp = 0;
         this.attack = 0;
         this.defense = 0;
@@ -129,7 +110,5 @@ public class Card  {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
-    
   
 }
