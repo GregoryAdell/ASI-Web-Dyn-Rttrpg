@@ -1,0 +1,109 @@
+version: "3.9"
+
+services:
+  postgres-user:
+    image: postgres:15
+    container_name: pg_user
+    environment:
+      POSTGRES_DB: userdb
+      POSTGRES_USER: useradmin
+      POSTGRES_PASSWORD: userpass
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_user:/var/lib/postgresql/data
+
+  postgres-card:
+    image: postgres:15
+    container_name: pg_card
+    environment:
+      POSTGRES_DB: carddb
+      POSTGRES_USER: cardadmin
+      POSTGRES_PASSWORD: cardpass
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata_card:/var/lib/postgresql/data
+
+  postgres-transaction:
+    image: postgres:15
+    container_name: pg_transaction
+    environment:
+      POSTGRES_DB: transactiondb
+      POSTGRES_USER: transadmin
+      POSTGRES_PASSWORD: transpass
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgdata_transaction:/var/lib/postgresql/data
+
+  user-microservice:
+    build:
+      context: ./user-microservice
+    container_name: user-service
+    depends_on:
+      - postgres-user
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-user:5432/userdb
+      SPRING_DATASOURCE_USERNAME: useradmin
+      SPRING_DATASOURCE_PASSWORD: userpass
+      SPRING_PROFILES_ACTIVE: docker
+
+  card-microservice:
+    build:
+      context: ./card-microservice
+    container_name: card-service
+    depends_on:
+      - postgres-card
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-card:5432/carddb
+      SPRING_DATASOURCE_USERNAME: cardadmin
+      SPRING_DATASOURCE_PASSWORD: cardpass
+      SPRING_PROFILES_ACTIVE: docker
+
+  transaction-microservice:
+    build:
+      context: ./transaction-microservice
+    container_name: transaction-service
+    depends_on:
+      - postgres-transaction
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-transaction:5432/transactiondb
+      SPRING_DATASOURCE_USERNAME: transadmin
+      SPRING_DATASOURCE_PASSWORD: transpass
+      SPRING_PROFILES_ACTIVE: docker
+  
+  reverse-proxy:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - user-microservice
+      - card-microservice
+      - transaction-microservice
+      - frontend
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    expose:
+      - "8080"
+
+
+volumes:
+  pgdata_user:
+  pgdata_card:
+  pgdata_transaction:
