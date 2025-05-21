@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription</title>
+  <link rel="stylesheet" href="/css/inscription.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/inscription.js" type="module" defer></script>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Créer un compte</h2>
+    <form id="register-form">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="confirmPassword">Confirmation du mot de passe</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required />
+
+      <button type="submit">S'inscrire</button>
+      <p id="message"></p>
+    </form>
+  </div>
+</body>
+</html>

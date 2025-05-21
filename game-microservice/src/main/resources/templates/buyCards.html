@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/buyCards.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/buyCards.js" type="module" defer></script>
+    <script src="/js/header.js" defer></script>
+    <title>Cartes de Jeu</title>
+
+</head>
+<body>
+
+<header id="user-header">
+    <div class="header-content">
+        <div class="money">
+            💵 <span id="player-money">Chargement...</span>
+        </div>
+        <div class="username">
+            <span id="player-username">Chargement...</span>
+        </div>
+    </div>
+</header>
+
+<header id="navigation-header">
+    <nav>
+        <a href="/sellCards" class="btn vendre">💰 Vendre</a>
+        <a href="#" class="btn jouer">🎮 Jouer</a>
+        <a href="/connexion" class="btn jouer">💡 Déconnecter</a>
+    </nav>
+</header>
+    <div class="header">
+        <h1>Boutique de Cartes</h1>
+        <p>Trouvez la carte parfaite pour votre collection</p>
+    </div>
+    
+    <div class="filters-container">
+        <div class="filter-group">
+            <label for="affinity-filter">Affinité</label>
+            <select id="affinity-filter">
+                <option value="all">Toutes les affinités</option>
+                <option value="GLACE">Glace</option>
+                <option value="FEU">Feu</option>
+                <option value="EAU">Eau</option>
+                <option value="ROCHE">Roche</option>
+                <option value="AIR">Air</option>
+                <option value="ELECTRICITE">Électricité</option>
+                <option value="POISON">Poison</option>
+                <option value="PLANTE">Plante</option>
+                <option value="LUMIERE">Lumière</option>
+                <option value="OMBRE">Ombre</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="family-filter">Famille</label>
+            <select id="family-filter">
+                <option value="all">Toutes les familles</option>
+                <option value="ECUREUIL">Écureuil</option>
+                <option value="CHAT">Chat</option>
+                <option value="RENARD">Renard</option>
+                <option value="OURS">Ours</option>
+                <option value="LICORNE">Licorne</option>
+                <option value="LAPIN">Lapin</option>
+                <option value="MOINEAU">Moineau</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <label for="price-filter">Prix</label>
+            <select id="price-filter">
+                <option value="all">Tous les prix</option>
+                <option value="0-10">0€ - 10€</option>
+                <option value="10-20">10€ - 20€</option>
+                <option value="20+">20€ et plus</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="cards-container">
+        <div id="cards-grid">
+            <template id="card-template">
+                <div>
+                    <div class="card" data-affinity="{{affinity}}" data-family="{{family}}" data-id="{{id}}">
+                        <div class="card-header">
+                            <img src="{{imgUrl}}" alt="{{imgUrl}} de {{name}}" class="card-image">
+                            <div class="family-badge">{{family}}</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{name}}</h3>
+                            <p class="card-description">{{description}}</p>
+                            <div class="affinity">{{affinity}}</div>
+
+                            <div class="stats">
+                                <div class="stat">
+                                    <span class="stat-label">HP</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: {{hp}}%"></div>
+                                    </div>
+                                    <span class="stat-value">{{hp}}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">ATK</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: {{attack}}%"></div>
+                                    </div>
+                                    <span class="stat-value">{{attack}}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">DEF</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: {{defense}}%"></div>
+                                    </div>
+                                    <span class="stat-value">{{defense}}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">NRG</span>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: {{energy}}%"></div>
+                                    </div>
+                                    <span class="stat-value">{{energy}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="price">{{price}}€</div>
+                            <form class="buy-form" method="POST" action="/api/cards/buy/{{id}}">
+                                <button type="submit" class="sell-button">Acheter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    
+</body>
+</html>
