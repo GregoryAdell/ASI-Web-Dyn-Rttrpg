@@ -40,19 +40,6 @@ services:
     volumes:
       - pgdata_transaction:/var/lib/postgresql/data
 
-  postgres-game:
-    image: postgres:15
-    container_name: pg_game
-    environment:
-      POSTGRES_DB: gamedb
-      POSTGRES_USER: gameadmin
-      POSTGRES_PASSWORD: gamepass
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "5436:5432"
-    volumes:
-      - pgdata_game:/var/lib/postgresql/data
-
   user-microservice:
     build:
       context: ./user-microservice
@@ -95,20 +82,6 @@ services:
       SPRING_DATASOURCE_PASSWORD: transpass
       SPRING_PROFILES_ACTIVE: docker
   
-  game-microservice:
-    build:
-      context: ./game-microservice
-    container_name: game-service
-    depends_on:
-      - postgres-game
-    ports:
-      - "8084:8084"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-game:5432/gamedb
-      SPRING_DATASOURCE_USERNAME: gameadmin
-      SPRING_DATASOURCE_PASSWORD: gamepass
-      SPRING_PROFILES_ACTIVE: docker
-  
   reverse-proxy:
     image: nginx:latest
     container_name: nginx-proxy
@@ -120,7 +93,6 @@ services:
       - user-microservice
       - card-microservice
       - transaction-microservice
-      - game-microservice
       - frontend
   
   frontend:
@@ -135,4 +107,3 @@ volumes:
   pgdata_user:
   pgdata_card:
   pgdata_transaction:
-  pgdata_game:
